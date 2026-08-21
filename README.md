@@ -4,6 +4,8 @@
 
 # RELAY//10
 
+[![CI](https://github.com/Dean00dev/RELAY10/actions/workflows/ci.yml/badge.svg)](https://github.com/Dean00dev/RELAY10/actions/workflows/ci.yml)
+
 **You get ten seconds. Then the game belongs to someone else.**
 
 RELAY//10 is a mobile-first browser survival game whose handoff link is the baton. Carry a

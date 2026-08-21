@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#070913">
+  <meta name="description" content="You get ten seconds. Then the game belongs to someone else. A serverless browser-game relay.">
+  <meta property="og:title" content="RELAY//10">
+  <meta property="og:description" content="I kept it alive. You have ten seconds.">
+  <meta property="og:image" content="assets/social-preview.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>RELAY//10 — Pass the run</title>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="wordmark" href="./" aria-label="RELAY 10 home">
+        <span>RELAY</span><b>//10</b>
+      </a>
+      <div class="top-actions">
+        <button id="sound-button" class="icon-button" type="button" aria-pressed="false" aria-label="Turn sound on">♪</button>
+        <button id="motion-button" class="icon-button" type="button" aria-pressed="false" aria-label="Use reduced motion">◎</button>
+        <button id="help-button" class="icon-button" type="button" aria-label="How to play">?</button>
+      </div>
+    </header>
+
+    <section id="game-frame" class="game-frame" aria-label="RELAY 10 game">
+      <canvas id="game-canvas" width="900" height="1200" aria-label="Neon relay flight arena"></canvas>
+      <div class="scanlines" aria-hidden="true"></div>
+
+      <div id="hud" class="hud is-hidden" aria-live="polite">
+        <div><span class="hud-label">LEG</span><strong id="hud-leg">01</strong></div>
+        <div class="timer-wrap"><span class="hud-label">HANDOFF IN</span><strong id="hud-timer">10.0</strong></div>
+        <div class="hud-right"><span class="hud-label">SIGNAL</span><strong id="hud-score">0</strong></div>
+        <div id="energy" class="energy" aria-label="2 energy remaining"></div>
+      </div>
+
+      <section id="start-screen" class="panel hero-panel">
+        <p class="eyebrow">A SERVERLESS SOCIAL ARCADE</p>
+        <h1>You get <em>ten seconds.</em><br>Then it belongs to someone else.</h1>
+        <p class="lede">Carry the signal. Dodge the static. Choose a gift for the next runner, then pass the exact run through a link.</p>
+
+        <div id="incoming-card" class="incoming-card is-hidden">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <div>
+            <small>INCOMING BATON</small>
+            <strong id="incoming-title">LEG 02 · 1,240m</strong>
+            <span id="incoming-gift">A runner left you a shield.</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button id="primary-start" class="primary-button" type="button">START TODAY'S RELAY</button>
+          <button id="open-start" class="secondary-button" type="button">NEW OPEN RELAY</button>
+        </div>
+        <p class="microcopy">One finger · Arrow keys · No account · No tracking</p>
+      </section>
+
+      <section id="countdown-screen" class="panel countdown-panel is-hidden" aria-live="assertive">
+        <p>BATON ACQUIRED</p>
+        <strong id="countdown-value">3</strong>
+        <span>Drag anywhere to steer</span>
+      </section>
+
+      <section id="handoff-screen" class="panel handoff-panel is-hidden">
+        <p class="eyebrow">LEG COMPLETE</p>
+        <h2>The signal is still alive.</h2>
+        <div class="result-grid">
+          <div><span>YOU CARRIED</span><strong id="result-distance">0m</strong></div>
+          <div><span>CHAIN SCORE</span><strong id="result-score">0</strong></div>
+          <div><span>NEXT LEG</span><strong id="result-leg">02</strong></div>
+        </div>
+        <p class="gift-heading">Leave one gift for the next runner</p>
+        <div class="gift-grid" role="radiogroup" aria-label="Handoff gift">
+          <button class="gift-button selected" data-gift="shield" role="radio" aria-checked="true" type="button"><b>◆</b><span><strong>SHIELD</strong><small>Restore one energy</small></span></button>
+          <button class="gift-button" data-gift="magnet" role="radio" aria-checked="false" type="button"><b>⌁</b><span><strong>MAGNET</strong><small>Pull sparks closer</small></span></button>
+          <button class="gift-button" data-gift="calm" role="radio" aria-checked="false" type="button"><b>◌</b><span><strong>CALM</strong><small>Slow the next leg</small></span></button>
+        </div>
+        <button id="share-button" class="primary-button" type="button">PASS THE BATON</button>
+        <button id="continue-button" class="text-button" type="button">Continue this chain myself</button>
+        <p id="share-status" class="share-status" aria-live="polite"></p>
+      </section>
+
+      <section id="crash-screen" class="panel crash-panel is-hidden">
+        <p class="eyebrow danger">SIGNAL LOST</p>
+        <h2>The chain ended on leg <span id="crash-leg">01</span>.</h2>
+        <strong id="crash-score">0</strong>
+        <span>FINAL SIGNAL</span>
+        <button id="memorial-button" class="primary-button" type="button">SHARE THE MEMORIAL</button>
+        <button id="retry-button" class="secondary-button" type="button">START A NEW RELAY</button>
+      </section>
+
+      <button id="pause-overlay" class="pause-overlay is-hidden" type="button">PAUSED — TAP TO RESUME</button>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="below-fold">
+      <div>
+        <p class="eyebrow">THE BATON IS THE LINK</p>
+        <h2>No lobby. No account. No server waiting for both players.</h2>
+      </div>
+      <p>Every obstacle comes from the relay seed. Every handoff carries the bounded run state in the URL fragment, which browsers do not send to a web server. The checksum catches damaged links; it is not an anti-cheat claim.</p>
+    </section>
+  </main>
+
+  <dialog id="help-dialog">
+    <form method="dialog">
+      <button class="dialog-close" aria-label="Close help">×</button>
+      <p class="eyebrow">HOW TO PLAY</p>
+      <h2>Keep the signal alive for ten seconds.</h2>
+      <ol>
+        <li><b>Steer</b> by dragging anywhere, or use arrow/WASD keys.</li>
+        <li><b>Collect sparks</b> to build score and combo.</li>
+        <li><b>Avoid gates and static mines.</b> Three hits end the chain.</li>
+        <li><b>Choose a gift</b>, then pass the generated link to the next runner.</li>
+      </ol>
+      <p class="dialog-note">Incoming relay data is validated and size-bounded. It is still player-controlled data, not a trusted leaderboard record.</p>
+    </form>
+  </dialog>
+
+  <script type="module" src="src/game.js"></script>
+</body>
+</html>

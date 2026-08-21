@@ -1,0 +1,14 @@
+{
+  "name": "relay-10",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A serverless ten-second browser-game relay.",
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check-project.mjs && node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#060812"/><stop offset="1" stop-color="#140c2b"/></linearGradient>
+    <linearGradient id="neon" x1="0" x2="1"><stop stop-color="#43f8ff"/><stop offset=".55" stop-color="#9a6cff"/><stop offset="1" stop-color="#ff4ecd"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g opacity=".22" fill="#fff">
+    <circle cx="95" cy="88" r="2"/><circle cx="220" cy="510" r="1.5"/><circle cx="1040" cy="105" r="2"/><circle cx="940" cy="530" r="1.5"/><circle cx="735" cy="82" r="1"/>
+  </g>
+  <path d="M90 360 C240 170 310 520 470 314 S750 115 860 330 1050 450 1130 240" fill="none" stroke="url(#neon)" stroke-width="8" filter="url(#glow)" opacity=".75"/>
+  <circle cx="470" cy="314" r="18" fill="#43f8ff" filter="url(#glow)"/>
+  <text x="90" y="155" fill="#f7f8ff" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="800" letter-spacing="-5">RELAY<tspan fill="#43f8ff">//10</tspan></text>
+  <text x="92" y="235" fill="#f7f8ff" font-family="Arial,Helvetica,sans-serif" font-size="38" font-weight="700">YOU GET TEN SECONDS.</text>
+  <text x="92" y="282" fill="#9299b5" font-family="Arial,Helvetica,sans-serif" font-size="30">THEN THE GAME BELONGS TO SOMEONE ELSE.</text>
+  <rect x="90" y="490" width="370" height="66" rx="33" fill="#43f8ff"/>
+  <text x="275" y="533" text-anchor="middle" fill="#041014" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="800" letter-spacing="2">TAKE THE BATON</text>
+</svg>
